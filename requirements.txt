@@ -1,0 +1,12 @@
+django
+channels
+requests
+azure-cognitiveservices-speech
+celery==4.4.0
+redis==3.3.11
+mysqlclient
+django-celery-results
+django-rest-framework
+asgi_redis
+channels-redis
+django-cors-headers
