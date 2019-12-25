@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'sound_classify',
     'channels',
+    'entity_recognisation',
+    'complete_meeting'
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -163,5 +165,6 @@ CHANNEL_LAYERS = {
 
 CELERY_IMPORTS = [
     "transcribe.tasks.azure_stt_tasks",
-    "sound_classify.tasks.ibm_sound_classifier"
+    "sound_classify.tasks.ibm_sound_classifier",
+    "entity_recognisation.tasks.entity_recognisation_tasks"
 ]

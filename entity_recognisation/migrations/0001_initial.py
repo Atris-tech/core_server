@@ -14,15 +14,15 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Transcribe',
+            name='Recognise',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('segment_id', models.IntegerField()),
-                ('text', models.TextField()),
+                ('text', models.TextField(blank=True)),
+                ('entities', models.TextField(blank=True)),
                 ('meeting_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='start_meeting.CreateMeeting')),
             ],
             options={
-                'db_table': 'transcribe_text',
+                'db_table': 'entity_recognisation',
             },
         ),
     ]
