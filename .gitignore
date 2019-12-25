@@ -128,4 +128,4 @@ venv
 .idea/vcs.xml
 .idea/inspectionProfiles/profiles_settings.xml
 .vscode/settings.json
-output
+output/*
