@@ -1,5 +1,4 @@
 from celery import shared_task
-from entity_recognisation.models import Recognise
 from start_meeting.models import CreateMeeting
 from transcribe.models import Transcribe
 from entity_recognisation.entityGlobals import EntityGlobals

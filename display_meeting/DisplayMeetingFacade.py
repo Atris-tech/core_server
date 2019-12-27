@@ -2,6 +2,8 @@ from start_meeting.models import CreateMeeting
 from transcribe.models import Transcribe
 from sound_classify.models import Classify
 from entity_recognisation.models import Recognise
+from keyword_recognization.models import KeywordRecognize
+
 class DisplayMeetingFacade:
     def getData(meetingID):
         createMeetingObj = CreateMeeting.objects.get(meeting_id = meetingID)
@@ -11,6 +13,10 @@ class DisplayMeetingFacade:
         entityDic = entityObj.entities
         transcribeDic = transcribeObj.order_by('segment_id').values()
         classifyDic = classifyObj.order_by('segment_id').values()
+        keywordObj=KeywordRecognize.objects.get(meeting_id=createMeetingObj)
+        keywordDic = keywordObj.entities
+
+
         finalDic = {}
         finalArray = []
         count = 0
@@ -28,6 +34,9 @@ class DisplayMeetingFacade:
 
             finalDic = {
                 "transcribe" : finalArray,
-                "entities" : entityDic
+                "entities" : entityDic,
+                "keywords":keywordDic
             }
+
+
         return finalDic

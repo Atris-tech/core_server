@@ -45,7 +45,10 @@ INSTALLED_APPS = [
     'sound_classify',
     'channels',
     'entity_recognisation',
-    'complete_meeting'
+    'complete_meeting',
+    'keyword_recognization',
+    'text_summarizer'
+    'sentiment_analyzer'
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
