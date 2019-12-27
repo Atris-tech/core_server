@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'entity_recognisation',
     'complete_meeting',
     'keyword_recognization',
-    'text_summarizer'
+    'text_summarizer',
     'sentiment_analyzer'
 ]
 

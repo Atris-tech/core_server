@@ -3,12 +3,12 @@ from start_meeting.models import CreateMeeting
 from transcribe.models import Transcribe
 import requests
 import json
-from sentiment_analyzer.models import SentimentAnalyzer
-from sentiment_analyzer.sentimentGlobals import SentimentGlobals
-globalObj = SentimentGlobals()
+from text_summarizer.models import TextSummarizer
+from text_summarizer.SummarizerGlobals import SummarizerGlobals
+globalObj = SummarizerGlobals()
 
 @shared_task()
-def sentimentAnalyzer(meetingId):
+def textSummarizer(meetingId):
     URL = globalObj.getGlobals(key="server")
 
     meeting_obj = CreateMeeting.objects.get(meeting_id=str(meetingId))
@@ -34,20 +34,12 @@ def sentimentAnalyzer(meetingId):
             params=params
         )
         data = r.text
-        x = r.text
-        res = x.strip('][').split(', ')
-        sentiments = res[0]
-        sentiments_dic = json.loads(sentiments)
-        sentiment_data=sentiments_dic["_value"]
-        sentiment_value=sentiments_dic["_score"]
 
-
-        SentimentAnalyzer(
+        newDic = json.loads(data)
+        summary_data = newDic["data"]
+        TextSummarizer(
             meeting_id=meeting_obj,
-            sentiment=sentiment_data,
-            sentiment_value=sentiment_value
-
-
+            summary=summary_data
         ).save()
 
 
@@ -61,18 +53,11 @@ def sentimentAnalyzer(meetingId):
             params=params
         )
         data = r.text
-        x = r.text
-        res = x.strip('][').split(', ')
-        sentiments = res[0]
-        sentiments_dic = json.loads(sentiments)
-        sentiment_data = sentiments_dic["_value"]
-        sentiment_value = sentiments_dic["_score"]
-
-        SentimentAnalyzer(
+        newDic = json.loads(data)
+        summary_data = newDic["data"]
+        TextSummarizer(
             meeting_id=meeting_obj,
-            sentiment=sentiment_data,
-            sentiment_value=sentiment_value
-
+            summary=summary_data
         ).save()
         task_count = task_count + 1
         CreateMeeting(
@@ -91,21 +76,14 @@ def sentimentAnalyzer(meetingId):
         )
         data = r.text
         newDic = json.loads(data)
-        keyword_data = newDic["data"]
-        x = r.text
-        res = x.strip('][').split(', ')
-        sentiments = res[0]
-        sentiments_dic = json.loads(sentiments)
-        sentiment_data = sentiments_dic["_value"]
-        sentiment_value = sentiments_dic["_score"]
-
-        SentimentAnalyzer(
+        summary_data = newDic["data"]
+        TextSummarizer(
             meeting_id=meeting_obj,
-            sentiment=sentiment_data,
-            sentiment_value=sentiment_value
-
+            summary=summary_data
         ).save()
         task_count = task_count + 1
         CreateMeeting(
             count=task_count,
         ).save()
+
+

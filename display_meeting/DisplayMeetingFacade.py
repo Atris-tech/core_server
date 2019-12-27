@@ -3,6 +3,8 @@ from transcribe.models import Transcribe
 from sound_classify.models import Classify
 from entity_recognisation.models import Recognise
 from keyword_recognization.models import KeywordRecognize
+from sentiment_analyzer.models import SentimentAnalyzer
+from text_summarizer.models import TextSummarizer
 
 class DisplayMeetingFacade:
     def getData(meetingID):
@@ -15,7 +17,10 @@ class DisplayMeetingFacade:
         classifyDic = classifyObj.order_by('segment_id').values()
         keywordObj=KeywordRecognize.objects.get(meeting_id=createMeetingObj)
         keywordDic = keywordObj.entities
-
+        summaryObj=TextSummarizer.objects.get(meeting_id=createMeetingObj)
+        summaryDic=summaryObj.entities
+        sentimentObj=SentimentAnalyzer.objects.get(meeting_id=createMeetingObj)
+        sentimentDic=sentimentObj.entities
 
         finalDic = {}
         finalArray = []
@@ -35,7 +40,11 @@ class DisplayMeetingFacade:
             finalDic = {
                 "transcribe" : finalArray,
                 "entities" : entityDic,
-                "keywords":keywordDic
+                "keywords":keywordDic,
+                "summarizer":summaryDic,
+                "sentiment":sentimentDic
+
+
             }
 
 

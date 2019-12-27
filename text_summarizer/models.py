@@ -1,14 +1,12 @@
-from django.db import models
 
 # Create your models here.
 from django.db import models
 from start_meeting.models import CreateMeeting
 
 # Create your models here.
-class SentimentAnalyzer(models.Model):
+class TextSummarizer(models.Model):
     meeting_id = models.ForeignKey(to=CreateMeeting, on_delete=models.CASCADE)
-    sentiment = models.TextField(blank=True)
-    sentiment_value=models.IntegerField()
+    summary = models.TextField(blank=True)
 
     class Meta:
-        db_table = "sentiment_analyzer"
+        db_table = "text_summarizer"
