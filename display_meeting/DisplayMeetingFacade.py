@@ -16,11 +16,12 @@ class DisplayMeetingFacade:
         transcribeDic = transcribeObj.order_by('segment_id').values()
         classifyDic = classifyObj.order_by('segment_id').values()
         keywordObj=KeywordRecognize.objects.get(meeting_id=createMeetingObj)
-        keywordDic = keywordObj.entities
+        keywordDic = keywordObj.keywords
         summaryObj=TextSummarizer.objects.get(meeting_id=createMeetingObj)
-        summaryDic=summaryObj.entities
+        summaryDic=summaryObj.summary
         sentimentObj=SentimentAnalyzer.objects.get(meeting_id=createMeetingObj)
-        sentimentDic=sentimentObj.entities
+        sentimentDic=sentimentObj.sentiment
+        fullText = createMeetingObj.text
 
         finalDic = {}
         finalArray = []
@@ -38,14 +39,17 @@ class DisplayMeetingFacade:
             count = count + 1
 
             finalDic = {
+                "fullText" : fullText,
+                "entities": entityDic,
                 "transcribe" : finalArray,
-                "entities" : entityDic,
                 "keywords":keywordDic,
                 "summarizer":summaryDic,
                 "sentiment":sentimentDic
 
 
             }
+
+
 
 
         return finalDic

@@ -6,6 +6,6 @@ from sentiment_analyzer.tasks.sentiment_analyzer_tasks import sentimentAnalyzer
 class CompleteMeetingHandler:
     def meetingHandler(self, meetingid):
         entityRecog.delay(meetingId = meetingid)
-        keywordRecog.delay(meetingid=meetingid)
-        textSummarizer.delay(meetingid)
-        sentimentAnalyzer.delay(meetingid)
+        keywordRecog.delay(meetingId=meetingid)
+        textSummarizer.delay(meetingId=meetingid)
+        sentimentAnalyzer.delay(meetingId=meetingid)

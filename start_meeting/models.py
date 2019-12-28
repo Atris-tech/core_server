@@ -9,7 +9,6 @@ class CreateMeeting(models.Model):
     group_id = models.CharField(max_length=40, blank=False)
     timestamp = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=30)
-    count = models.IntegerField(default=0)
 
     class Meta:
         db_table = "meetings"

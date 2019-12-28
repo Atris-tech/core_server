@@ -4,8 +4,14 @@ from rest_framework.response import Response
 from rest_framework import status
 from start_meeting.serializers import CreateMeetingSerializer
 from start_meeting.models import CreateMeeting
+from web_socket.services.RedisDbService import UpdateToRedis
 
-
+redisobj = UpdateToRedis()
+to_update_meeting_dic = {
+            "count_m" : 0,
+            "count_ct" : 0,
+            "count_cs": 0
+        }
 
 
 class CreateMeetingView(APIView):
@@ -29,6 +35,7 @@ class CreateMeetingView(APIView):
             )
             q_obj.status = 'started'
             q_obj.save()
+            redisobj.add(key=create_meeting_serializer.data["meeting_id"], dic=to_update_meeting_dic)
             return Response(
                 data=meeting_response,
                 status = status.HTTP_200_OK
