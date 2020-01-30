@@ -92,7 +92,7 @@ def soundClassifier(meetingId, newFile, segment):
     )
     to_check_dic = redis_obj.get_data(key=meetingId)
 
-    to_check_dic["count_cs"] = to_check_dic["count_cs"] + 1
+    to_check_dic["count_cs"] = int(to_check_dic["count_ct"]) + 1
     redis_obj.add(key=meetingId, dic=to_check_dic)
 
         # print(r.text)

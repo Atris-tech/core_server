@@ -21,7 +21,7 @@ def azure_stot(meetingId, newFile, segment):
     # print("value")
     # print(value)
 
-    speech_key, service_region = "ac8b9913a547447c84102cc2a9a26059", "centralindia"
+    speech_key, service_region = "c75ee69395f040baa9801ce00134030e", "eastus"
     speech_config = speechsdk.SpeechConfig(subscription=speech_key, region=service_region)
 
     # Creates an audio configuration that points to an audio file.
@@ -72,7 +72,9 @@ def azure_stot(meetingId, newFile, segment):
             )
             to_check_dic = redis_obj.get_data(key=meetingId)
             #print(to_check_dic)
-            to_check_dic["count_ct"] = to_check_dic["count_ct"] + 1
+            x = int(to_check_dic["count_ct"])
+            print(type(x))
+            to_check_dic["count_ct"] = x + 1
             redis_obj.add(key=meetingId, dic=to_check_dic)
         elif result.reason == speechsdk.ResultReason.NoMatch:
 
@@ -82,7 +84,7 @@ def azure_stot(meetingId, newFile, segment):
         elif result.reason == speechsdk.ResultReason.Canceled:
             to_check_dic = redis_obj.get_data(key=meetingId)
             #print(to_check_dic)
-            to_check_dic["count_ct"] = to_check_dic["count_ct"] + 1
+            to_check_dic["count_ct"] = int(to_check_dic["count_ct"]) + 1
             redis_obj.add(key=meetingId, dic=to_check_dic)
             cancellation_details = result.cancellation_details
             print("Speech Recognition canceled: {}".format(cancellation_details.reason))
@@ -94,7 +96,9 @@ def azure_stot(meetingId, newFile, segment):
         s = "<silent audio>"
         to_check_dic = redis_obj.get_data(key=meetingId)
         print(to_check_dic)
-        to_check_dic["count_ct"] = to_check_dic["count_ct"] + 1
+        x = int(to_check_dic["count_ct"])
+        print(type(x))
+        to_check_dic["count_ct"] = x + 1
         redis_obj.add(key=meetingId, dic=to_check_dic)
         return s
 

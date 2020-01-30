@@ -25,7 +25,7 @@ SECRET_KEY = 'u%kk5x&5$-3bgotpj$@15%5*&!rk6!%*rdv!$5g+ih3lvrlx36'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.43.254', '127.0.0.1']
+ALLOWED_HOSTS = ['192.168.43.254', '127.0.0.1', '192.168.43.217']
 
 
 # Application definition
@@ -48,7 +48,9 @@ INSTALLED_APPS = [
     'complete_meeting',
     'keyword_recognization',
     'text_summarizer',
-    'sentiment_analyzer'
+    'sentiment_analyzer',
+    'file_upload'
+
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -144,6 +146,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
 
 if DEBUG:
     # Celery configuration

@@ -5,7 +5,7 @@ from entity_recognisation.models import Recognise
 from keyword_recognization.models import KeywordRecognize
 from sentiment_analyzer.models import SentimentAnalyzer
 from text_summarizer.models import TextSummarizer
-
+from file_upload.models import Upload
 class DisplayMeetingFacade:
     def getData(meetingID):
         createMeetingObj = CreateMeeting.objects.get(meeting_id = meetingID)
@@ -20,6 +20,11 @@ class DisplayMeetingFacade:
         summaryObj=TextSummarizer.objects.get(meeting_id=createMeetingObj)
         summaryDic=summaryObj.summary
         sentimentObj=SentimentAnalyzer.objects.get(meeting_id=createMeetingObj)
+        fileURLObj=Upload.objects.get(meeting_id=meetingID)
+        URLDic = fileURLObj.file_url
+
+
+    # url = File
         sentimentDic=sentimentObj.sentiment
         fullText = createMeetingObj.text
 
@@ -44,7 +49,8 @@ class DisplayMeetingFacade:
                 "transcribe" : finalArray,
                 "keywords":keywordDic,
                 "summarizer":summaryDic,
-                "sentiment":sentimentDic
+                "sentiment":sentimentDic,
+                "file_url":URLDic
 
 
             }

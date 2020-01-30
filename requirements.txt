@@ -10,3 +10,5 @@ django-rest-framework
 asgi_redis
 channels-redis
 django-cors-headers
+azure-storage-blob
+python-magic

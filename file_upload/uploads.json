@@ -1,0 +1,6 @@
+{
+  "connection_str" : "DefaultEndpointsProtocol=https;AccountName=atris;AccountKey=zyzQOmD0/OydMTIE9AgPGzbsdoNm0Tc08V5TTcQjbL5JhTUu8TQi1lYlEyubODNZUctDrQBJ79NQg3jhgD9P1A==;EndpointSuffix=core.windows.net",
+  "container" : "atris",
+  "account_url" : "https://atris.blob.core.windows.net",
+  "allowed_types" : "audio/x-wav"
+}
