@@ -17,6 +17,7 @@ class Upload(models.Model):
   meeting_id = models.TextField(blank=False)
   file_url = models.TextField(blank=False)
   timestamp = models.DateTimeField(auto_now_add=True)
+  waveform=models.TextField(blank=False)
 
   class Meta:
     db_table = "file-url"

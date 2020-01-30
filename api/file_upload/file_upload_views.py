@@ -11,7 +11,9 @@ from file_upload.config import Config
 from file_upload.models import Upload
 from pathlib import Path
 import shutil
-
+import subprocess
+import json
+import uuid
 
 configObj = Config()
 
@@ -56,12 +58,18 @@ class UploadView(APIView):
                     container_name=container_to_upload
                 ).url
                 print(url)
+                toConvertJson= str(fileParentFolder) + "/" + str(uuid.uuid4()) + ".json"
+                """audiowaveform -i himono.wav -o test.json -z 256 -b 8"""
+                subprocess.call(["audiowaveform", "-i", fileData, "-o", toConvertJson, "-z", "256", "-b", "8"])
                 # save to database of filemodel
-
+                print(toConvertJson)
+                with open(toConvertJson, 'r') as f:
+                    config = json.load(f)
                 u_obj = Upload.objects.get(
                     meeting_id=meetingId
                 )
                 u_obj.file_url = url
+                u_obj.waveform = config
                 u_obj.save()
                 convertResponse = {
                     "msg": "done",

@@ -22,6 +22,7 @@ class DisplayMeetingFacade:
         sentimentObj=SentimentAnalyzer.objects.get(meeting_id=createMeetingObj)
         fileURLObj=Upload.objects.get(meeting_id=meetingID)
         URLDic = fileURLObj.file_url
+        audioWaveform= fileURLObj.waveform
 
 
     # url = File
@@ -50,7 +51,8 @@ class DisplayMeetingFacade:
                 "keywords":keywordDic,
                 "summarizer":summaryDic,
                 "sentiment":sentimentDic,
-                "file_url":URLDic
+                "file_url":URLDic,
+                "audio_waveform":audioWaveform
 
 
             }
