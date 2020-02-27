@@ -5,7 +5,7 @@ from start_meeting.models import CreateMeeting
 
 # the below function will create a unique folder and store the uploaded file in it
 def get_file_path(instance, filename):
-    filename = "media/"+ str(uuid.uuid4()) + "/" + str(uuid.uuid4()) + filename
+    filename = "media/"+ str(uuid.uuid4()) + "/" + str(uuid.uuid4()) + filename + ".wav"
     print(filename)
     return os.path.join('', filename)
 

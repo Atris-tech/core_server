@@ -14,6 +14,8 @@ import shutil
 import subprocess
 import json
 import uuid
+from complete_meeting.CompleteMeetingHandler import CompleteMeetingHandler
+meetingHandlerobj = CompleteMeetingHandler()
 
 configObj = Config()
 
@@ -35,6 +37,7 @@ class UploadView(APIView):
             upload_serializer.save()
             # serialize and convert model data to a serialized json
             # Fetch data from serialized json
+
             fileData = upload_serializer.data["file"]
             meetingId = upload_serializer.data["meeting_id"]
             filePath = fileData.strip("/")
@@ -49,6 +52,7 @@ class UploadView(APIView):
                     container=container_to_upload,
                     blob=fileData
                 )
+                meetingHandlerobj.meetingHandler(meetingid=meetingId)
                 with open(fileData, "rb") as data:
                     blob_client.upload_blob(data)
                 print("\nUploading to Azure Storage as blob:\n\t" + fileData)

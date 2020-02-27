@@ -7,7 +7,7 @@ from display_meeting.DisplayMeetingFacade import DisplayMeetingFacade
 meetingFacadeObj = DisplayMeetingFacade
 
 class DisplayMeeting(APIView):
-    def get(self, request):
+    def post(self, request):
         meeting_serializer = DisplayMeetingSerializer(data=request.data)
         print(request.data)
         if meeting_serializer.is_valid():

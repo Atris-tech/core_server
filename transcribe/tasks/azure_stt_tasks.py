@@ -71,8 +71,10 @@ def azure_stot(meetingId, newFile, segment):
                 }
             )
             to_check_dic = redis_obj.get_data(key=meetingId)
-            #print(to_check_dic)
+            print(to_check_dic, "to checl dic")
+            print(type(to_check_dic))
             x = int(to_check_dic["count_ct"])
+            print(x)
             print(type(x))
             to_check_dic["count_ct"] = x + 1
             redis_obj.add(key=meetingId, dic=to_check_dic)

@@ -15,29 +15,77 @@ def keywordRecog(meetingId):
 
     meeting_obj = CreateMeeting.objects.get(meeting_id=str(meetingId))
     transcribeobj = Transcribe.objects.filter(meeting_id=meeting_obj)
-    task_count = redis_obj.normal_get(key=meetingId)
-    task_count = int(task_count)
-
-    print("task count ")
-    print(task_count)
+    # task_count = redis_obj.normal_get(key=meetingId)
+    # task_count = int(task_count)
+    #
+    # print("task count ")
+    # print(task_count)
     # labels is a dictionary
-    if int(task_count) == 0:
-        transcribedic = transcribeobj.values()
+    # if int(task_count) == 0:
+    #     transcribedic = transcribeobj.values()
+    #
+    #     to_send_text = ''
+    #     for val in transcribedic:
+    #         to_send_text = to_send_text + ' ' + str(val['text'])
+    #     meeting_obj.text = to_send_text
+    #     meeting_obj.save()
+    #     print(to_send_text)
+    #
+    #     params = (
+    #         ('text', to_send_text),
+    #     )
+    #     r = requests.post(
+    #         url=URL,
+    #         params=params
+    #     )
+    #     data = r.text
+    #     newDic = json.loads(data)
+    #     keyword_data = newDic["data"]
+    #     KeywordRecognize(
+    #         meeting_id=meeting_obj,
+    #         keywords=keyword_data
+    #     ).save()
+    #     task_count = int(task_count) + 1
+    #     redis_obj.add(key=meetingId, dic=task_count)
+    #
+    #
+    # elif int(task_count) == 3:
+    #     to_send_text = meeting_obj.text
+    #     print("text")
+    #     print(to_send_text)
+    #     params = (
+    #         ('text', to_send_text),
+    #     )
+    #     r = requests.post(
+    #         url=URL,
+    #         params=params
+    #     )
+    #     data = r.text
+    #     newDic = json.loads(data)
+    #     keyword_data = newDic["data"]
+    #     KeywordRecognize(
+    #         meeting_id=meeting_obj,
+    #         keywords=keyword_data
+    #     ).save()
+    #     task_count = int(task_count) + 1
+    #     redis_obj.add(key=meetingId, dic=task_count)
+    #     CreateMeeting(
+    #         status='complete'
+    #     ).save()
 
-        to_send_text = ''
-        for val in transcribedic:
-            to_send_text = to_send_text + ' ' + str(val['text'])
-        meeting_obj.text = to_send_text
-        meeting_obj.save()
-        print(to_send_text)
+    # else:
+    to_send_text = meeting_obj.text
+    params = (
 
-        params = (
-            ('text', to_send_text),
-        )
-        r = requests.post(
-            url=URL,
-            params=params
-        )
+        ('text', to_send_text),
+    )
+    r = requests.post(
+        url=URL,
+        params=params
+    )
+    data = r.text
+    print(data)
+    if bool(data):
         data = r.text
         newDic = json.loads(data)
         keyword_data = newDic["data"]
@@ -45,50 +93,11 @@ def keywordRecog(meetingId):
             meeting_id=meeting_obj,
             keywords=keyword_data
         ).save()
-        task_count = int(task_count) + 1
-        redis_obj.add(key=meetingId, dic=task_count)
-
-
-    elif int(task_count) == 3:
-        to_send_text = meeting_obj.text
-        print("text")
-        print(to_send_text)
-        params = (
-            ('text', to_send_text),
-        )
-        r = requests.post(
-            url=URL,
-            params=params
-        )
-        data = r.text
-        newDic = json.loads(data)
-        keyword_data = newDic["data"]
-        KeywordRecognize(
-            meeting_id=meeting_obj,
-            keywords=keyword_data
-        ).save()
-        task_count = int(task_count) + 1
-        redis_obj.add(key=meetingId, dic=task_count)
-        CreateMeeting(
-            status='complete'
-        ).save()
-
     else:
-        to_send_text = meeting_obj.text
-        params = (
-
-            ('text', to_send_text),
-        )
-        r = requests.post(
-            url=URL,
-            params=params
-        )
-        data = r.text
-        newDic = json.loads(data)
-        keyword_data = newDic["data"]
+        keyword_data = {}
         KeywordRecognize(
             meeting_id=meeting_obj,
             keywords=keyword_data
         ).save()
-        task_count = int(task_count) + 1
-        redis_obj.add(key=meetingId, dic=task_count)
+    # task_count = int(task_count) + 1
+    # redis_obj.add(key=meetingId, dic=task_count)

@@ -61,10 +61,10 @@ class AtrisConsumer(WebsocketConsumer):
                 print("meeting Dic", meeting_dic)
                 print("done bro")
                 redis_obj.add(key=meeting_id_key_val, dic=0)
-                entityRecog.delay(meetingId=meeting_id_key_val)
-                keywordRecog.delay(meetingId=meeting_id_key_val)
-                textSummarizer.delay(meetingId=meeting_id_key_val)
-                sentimentAnalyzer.delay(meetingId=meeting_id_key_val)
+                # entityRecog.delay(meetingId=meeting_id_key_val)
+                # keywordRecog.delay(meetingId=meeting_id_key_val)
+                # textSummarizer.delay(meetingId=meeting_id_key_val)
+                # sentimentAnalyzer.delay(meetingId=meeting_id_key_val)
 
             else:
                 self.meeting_id = str(text_data)
