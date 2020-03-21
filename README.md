@@ -11,4 +11,4 @@ CREATE USER 'atris'@'localhost' IDENTIFIED BY '1234';
 GRANT ALL PRIVILEGES ON *.* TO 'atris'@'localhost' IDENTIFIED BY '1234';
 
 ## Todo 
-Remove all redundand azure speech to text service and change it with :- https://github.com/at16k/at16k
+Remove all redundant azure speech to text service and change it with :- https://github.com/at16k/at16k
