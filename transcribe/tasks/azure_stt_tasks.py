@@ -21,7 +21,7 @@ def azure_stot(meetingId, newFile, segment):
     # print("value")
     # print(value)
 
-    speech_key, service_region = "c75ee69395f040baa9801ce00134030e", "eastus"
+    speech_key, service_region = "", ""
     speech_config = speechsdk.SpeechConfig(subscription=speech_key, region=service_region)
 
     # Creates an audio configuration that points to an audio file.
